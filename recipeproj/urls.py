@@ -25,6 +25,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',receipes,name="receipes"),
+    path('delete-receipe/<id>/',delete_receipe,name="delete_receipe"),
+    
 ]
 
 if settings.DEBUG:

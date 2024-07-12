@@ -31,3 +31,29 @@ def delete_receipe(request, id ):
     queryset = Receipe.objects.get(id=id)
     queryset.delete()
     return redirect('/')
+
+
+
+def update_receipe(request,id):
+    queryset = Receipe.objects.get(id=id)
+    
+    if request.method=="POST":
+        data  = request.POST
+        receipe_description = data.get('receipe_description')
+        receipe_name = data.get('receipe_name')
+        receipe_image = request.FILES.get('receipe_image')
+
+        queryset.receipe_name = receipe_name
+        queryset.receipe_description = receipe_description
+        if receipe_image:
+            queryset.receipe_image = receipe_image
+        
+        queryset.save()
+
+        return redirect('/')
+        
+
+    context = {'receipe':queryset}
+    return render(request,"receipes/update_receipes.html",context)
+
+

@@ -3,9 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receipe Project</title>
+    <title>Add Recipe</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px; 
+            margin: auto;
+            
+        }
+        .form-container h1 {
+            color: #28a745;
+        }
+        .form-container .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .form-container .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .table{
+            margin-top: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h1>This is a receipe Project</h1>
+    <div class="container mt-5">
+        <div class="form-container">
+            <h1 class="text-center mb-4">Add a New Recipe</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="recipeName">Recipe Name</label>
+                    <input name="receipe_name" type="text" class="form-control" id="recipeName" placeholder="Enter recipe name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipeDescription">Recipe Description</label>
+                    <textarea name="receipe_description" class="form-control" id="recipeDescription" rows="3" placeholder="Enter recipe description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="recipeImage">Recipe Image</label>
+                    <input name="receipe_image" type="file" class="form-control-file mt-2" id="recipeImage">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success btn-block">Add Recipe</button>
+                </div>
+            </form>
+        </div>
+        
+        <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Receipe Name</th>
+                <th scope="col">Receipe Description</th>
+                <th scope="col">Receipe Image</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for receipe in receipes %}
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{receipe.receipe_name}}</td>
+                <td>{{receipe.receipe_description}}</td>
+                <td>
+                    <img src="/media/{{receipe.receipe_image}}" style="display: block;margin-left: auto;margin-right: auto;width: 100%;">
+                </td>
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        
+    </div>
 </body>
 </html>

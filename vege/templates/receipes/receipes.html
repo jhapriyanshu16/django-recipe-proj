@@ -77,7 +77,9 @@
                 <td>
                     <img src="/media/{{receipe.receipe_image}}" style="display: block;margin-left: auto;margin-right: auto;width: 100%;">
                 </td>
-
+                <td>
+                    <a href="/delete-receipe/{{receipe.id}}" class="btn btn-danger">Delete</a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
